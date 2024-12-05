@@ -1,0 +1,73 @@
+.form-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+}
+
+.form-input-container {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.form-input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #04C8DE;
+    box-shadow: 0 0 10px rgba(4, 200, 222, 0.3);
+}
+
+.form-button {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(89deg, #FF5EDF 0%, #04C8DE 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .form-input-container {
+        flex-direction: column;
+    }
+    
+    .form-button {
+        width: 100%;
+    }
+}
