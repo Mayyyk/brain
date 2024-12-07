@@ -1,0 +1,18 @@
+.rank {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.rank-text {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.rank-number {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: bold;
+}

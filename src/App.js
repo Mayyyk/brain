@@ -1,49 +1,98 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Navigation from './components/navigation/Navigation';
-import Logo from './components/logo/Logo';
-import InputForm from './components/input/InputForm';
+import Navigation from './components/navigation/Navigation.js';
+import Logo from './components/logo/Logo.js';
+import InputForm from './components/input/InputForm.js';
+import Rank from './components/rank/Rank.js';
 import ParticlesBg from 'particles-bg';
-
-let config = {
-	num: [4, 7],
-	rps: 0.1,
-	radius: [5, 40],
-	life: [1.5, 3],
-	v: [2, 3],
-	tha: [-40, 40],
-	// body: "./img/icon.png", // Whether to render pictures
-	// rotate: [0, 20],
-	alpha: [0.6, 0],
-	scale: [1, 0.1],
-	position: 'center', // all or center or {x:1,y:1,width:100,height:100}
-	color: ['random', '#ff0000'],
-	cross: 'dead', // cross or bround
-	random: 15, // or null,
-	g: 5, // gravity
-	// f: [2, -1], // force
-	onParticleUpdate: (ctx, particle) => {
-		ctx.beginPath();
-		ctx.rect(
-			particle.p.x,
-			particle.p.y,
-			particle.radius * 2,
-			particle.radius * 2
-		);
-		ctx.fillStyle = particle.color;
-		ctx.fill();
-		ctx.closePath();
-	},
-};
+import ImageGeneration from './components/imagegeneration/ImageGeneration.js';
+import SignIn from './components/signin/SignIn.js';
+import Register from './components/register/Register.js';
 
 function App() {
+	const [input, setInput] = useState('');
+	const [generatedImage, setGeneratedImage] = useState(null);
+	const [isGenerating, setIsGenerating] = useState(false);
+	const [route, setRoute] = useState('signin');
+	const [user, setUser] = useState(null);
+
+	const resetState = () => {
+		setUser(null);
+		setInput('');
+		setGeneratedImage(null);
+		// Reset any other states you need to clear
+	};
+
+	const setUserData = (userData) => {
+		setUser(userData);
+	};
+
+	const handleGenerate = () => {
+		if (!input || !user?.id) {
+			console.log('App: No input or user ID provided');
+			return;
+		}
+		
+		console.log('Starting image generation with prompt:', input);
+		setIsGenerating(true);
+		fetch('http://localhost:3000/generate-image', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				prompt: input,
+				id: user.id
+			})
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			setGeneratedImage(data.imageUrl);
+			setUser(prevUser => ({
+				...prevUser,
+				entries: data.entries
+			}));
+			setIsGenerating(false);
+		})
+		.catch(error => {
+			console.error('Image generation error:', error);
+			setIsGenerating(false);
+		});
+	};
+
+	const onRouteChange = (route) => {
+		if (route === 'signin') {
+			resetState();
+		}
+		setRoute(route);
+	};
+
 	return (
 		<div className='App'>
-			<Navigation />
-			<InputForm />
-			{/* <Rank /> */}
 			<Logo />
-			<ParticlesBg className='particles' type='circle' bg={true} />
+			{route === 'signin' ? (
+				<SignIn onRouteChange={onRouteChange} setUser={setUserData} />
+			) : route === 'register' ? (
+				<Register onRouteChange={onRouteChange} />
+			) : (
+				<div>
+					<Navigation onRouteChange={onRouteChange} />
+					<Rank name={user?.name} entries={user?.entries} />
+					<InputForm 
+						onInputChange={setInput} 
+						onGenerate={handleGenerate}
+						isGenerating={isGenerating}
+					/>
+					<ParticlesBg className='particles' type='circle' bg={true} />
+					<ImageGeneration 
+						imageUrl={generatedImage} 
+						isLoading={isGenerating}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
