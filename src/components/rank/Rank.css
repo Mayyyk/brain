@@ -1,18 +1,25 @@
 .rank {
     text-align: center;
     margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 20px;
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .rank-text {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-    margin-bottom: 0.5rem;
+    color: rgba(248, 250, 252, 0.9);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }
 
 .rank-number {
-    background: var(--primary-gradient);
+    font-size: 4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2.5rem;
-    font-weight: bold;
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
 }

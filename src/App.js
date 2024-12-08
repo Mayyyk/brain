@@ -35,7 +35,7 @@ function App() {
 		
 		console.log('Starting image generation with prompt:', input);
 		setIsGenerating(true);
-		fetch('http://localhost:3000/generate-image', {
+		fetch('https://image-gen-backend-production.up.railway.app//generate-image', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

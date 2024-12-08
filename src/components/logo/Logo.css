@@ -2,23 +2,32 @@
 	position: absolute;
 	top: 20px;
 	left: 20px;
+}
+
+.tilt {
+	background: rgba(30, 41, 59, 0.7);
+	border: 2px solid rgba(139, 92, 246, 0.3);
+	border-radius: 20px;
+	padding: 25px;
 	width: 150px;
 	height: 150px;
-	padding: 25px;
-	background: var(--glass-background);
 	backdrop-filter: blur(10px);
-	border-radius: 20px;
-	box-shadow: 0 8px 32px 0 var(--glass-shadow);
-	border: 1px solid var(--glass-border);
 	transition: all 0.3s ease;
 }
 
-.logo-container:hover {
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-	transform: scale(1.05);
+.tilt:hover {
+	border-color: rgba(139, 92, 246, 0.8);
+	box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
 }
 
-.logo {
-	width: 100%;
-	height: auto;
+.tilt-inner {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tilt-inner h1 {
+	font-size: 4rem;
+	margin: 0;
 }
