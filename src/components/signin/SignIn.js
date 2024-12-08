@@ -38,10 +38,12 @@ const SignIn = ({ onRouteChange, setUser }) => {
                 setUser(user);
                 onRouteChange('home');
             } else {
+                console.error('wrong credentials:', user);
                 setErrors({ submit: 'Invalid credentials' });
             }
         })
         .catch(error => {
+            console.error('Sign in error:', error);
             setErrors({ submit: 'Sign in failed. Please try again.' });
         });
     };
