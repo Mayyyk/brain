@@ -27,7 +27,7 @@ const SignIn = ({ onRouteChange, setUser }) => {
             return;
         }
 
-        fetch('https://image-gen-backend-production.up.railway.app//signin', {
+        fetch('https://brain-app-server-production.up.railway.app/signin', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })

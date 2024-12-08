@@ -50,7 +50,7 @@ const Register = ({ onRouteChange }) => {
 
 		console.log('Register: email:', email);
 		console.log('Register: password:', password);
-		fetch('https://image-gen-backend-production.up.railway.app//register', {
+		fetch('https://brain-app-server-production.up.railway.app/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
